@@ -13,10 +13,10 @@ for (let item of karakterer){
                 temp.push(x.childNodes[3].childNodes[1].innerText)
             }
             if (x.className === "col6Resultat textAlignRight"){ //Finner resultatkolonnen
-                if(!(x.childNodes[4].innerText in dict)){ //Sjekker om faget har karakter, stopper løkken hvis ikke
+                if(!(x.childNodes[x.childNodes.length-1].innerText in dict)){ //Sjekker om faget har karakter, stopper løkken hvis ikke
                     break
                 }
-                points = dict[x.childNodes[4].innerText] //Gjør bokstavkarakter om til poeng
+                points = dict[x.childNodes[x.childNodes.length-1].innerText] //Gjør bokstavkarakter om til poeng
                 temp.push(points); //Index 4 inneholder karakteren som string
             }
             else if (x.className === "col7Studiepoeng textAlignRight"){
