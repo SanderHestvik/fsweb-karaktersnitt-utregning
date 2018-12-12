@@ -8,5 +8,6 @@ Instruksjoner:
 Merk:
 - Dette skriptet vil ignorere fag som har ikke bestått eller bestått siden disse ikke er en del av snittet
 - Dette skriptet tar hensyn til antall studiepoeng og merker om en karakter har blitt forbedret
+- Fag med 0 studiepoeng vil ignoreres
 
 

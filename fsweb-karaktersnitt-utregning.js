@@ -58,23 +58,28 @@ function update(){
     console.log("Total student points: " + total_student_points)
     console.log("Total subjects with grades: " + total_subject_with_grades)
     console.log("Average: " + average)
-    resultater.innerText = "Du har fått karakter i " + total_subject_with_grades + " fag, og har et snitt på " + average
+    resultater.innerText = ((total_subject_with_grades >1) ? ("I de " + total_subject_with_grades + " fagene") : ("I faget"))
+        + " du har valgt, har du et snitt på " + average;
+    if(total_subject_with_grades === 0) {resultater.innerText = "Du har ikke valgt noen fag"}
 }
 
 
 list = list.reverse() //Slik at elementet som inneholder studiepoeng kommer først
 list.forEach(x => {
     if (x[0] in grades_dict){
-            if(x[1]> grades_dict[x[0]][0]){
-                grades_dict[x[0]][0] = x[1]
-                let temp = grades_dict[x[0]][2]
-                grades_dict[x[0]][2] = x[3]
-                temp.parentNode.removeChild(temp) //Fjerner checkbox fra den karakteren som ikke er telt med
-            }
-            else{
-                x[3].parentNode.removeChild(x[3])
-            }
 
+        if(x[1]> grades_dict[x[0]][0]){
+            grades_dict[x[0]][0] = x[1]
+            let temp = grades_dict[x[0]][2]
+            grades_dict[x[0]][2] = x[3]
+            temp.parentNode.removeChild(temp) //Fjerner checkbox fra den karakteren som ikke er telt med
+        }
+        else{
+            x[3].parentNode.removeChild(x[3])
+        }
+    }
+    else if(x[2][2].innerText === 0 || x[2][2].innerText === "0"){ //Ignorerer fag med 0 studiepoeng
+        x[3].parentNode.removeChild(x[3])
     }
     else {
         grades_dict[x[0]] = [x[1], parseFloat(x[2][2].innerText.replace(",", ".")), x[3]]
