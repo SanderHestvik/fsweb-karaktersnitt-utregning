@@ -26,6 +26,9 @@ for (let item of karakterer){
 
             }
             else if (x.className === "col7Studiepoeng textAlignRight"){
+                if(x.childNodes.length < 3){
+                    break
+                }
                 temp.push(x.childNodes)//Hvis karakteren (Ingen studiepoeng) er forbedret vil childnodes være tom, fikser i neste loop
                 let input = document.createElement("input") //Legger til checkbox med hver karakter, slik at man manuelt kan ignorere karakterer
                 input.setAttribute("type", "checkbox")
@@ -35,7 +38,7 @@ for (let item of karakterer){
                 temp.push(input)
             }
         }
-        if((temp.length > 1)){ //Hvis listen bare har 1 element betyr det at faget ikke hadde karakter
+        if((temp.length > 2)){ //Hvis listen bare har 1 element betyr det at faget ikke hadde karakter
             list.push(temp)
         }
     }
@@ -63,22 +66,8 @@ function update(){
     if(total_subject_with_grades === 0) {resultater.innerText = "Du har ikke valgt noen fag"}
 }
 
-
-list = list.reverse() //Slik at elementet som inneholder studiepoeng kommer først
 list.forEach(x => {
-    if (x[0] in grades_dict){
-
-        if(x[1]> grades_dict[x[0]][0]){
-            grades_dict[x[0]][0] = x[1]
-            let temp = grades_dict[x[0]][2]
-            grades_dict[x[0]][2] = x[3]
-            temp.parentNode.removeChild(temp) //Fjerner checkbox fra den karakteren som ikke er telt med
-        }
-        else{
-            x[3].parentNode.removeChild(x[3])
-        }
-    }
-    else if(x[2][2].innerText === 0 || x[2][2].innerText === "0"){ //Ignorerer fag med 0 studiepoeng
+    if(x[2][2].innerText === 0 || x[2][2].innerText === "0"){ //Ignorerer fag med 0 studiepoeng
         x[3].parentNode.removeChild(x[3])
     }
     else {
@@ -88,6 +77,5 @@ list.forEach(x => {
 })
 
 update()
-console.log(grades_dict)
 
 
