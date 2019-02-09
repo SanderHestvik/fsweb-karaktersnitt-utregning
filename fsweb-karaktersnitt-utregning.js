@@ -13,28 +13,28 @@ for (let row of karaktererGrid){
     if ((row.className === "none") || (row.className === "resultatTop")) //De klassene som inneholder karaktererGrid for faget
     {
         let temp =[];
-        for (let col of row.childNodes){
-            if (col.className === "col2Emne"){ //Legger til emnenavn
-                temp.push(col.childNodes[3].childNodes[1].innerText)
+        for (let cell of row.childNodes){
+            if (cell.className === "col2Emne"){ //Legger til emnenavn
+                temp.push(cell.childNodes[3].childNodes[1].innerText)
             }
-            if (col.className === "col6Resultat textAlignRight"){ //Finner resultatkolonnen
-                if(!(col.childNodes[col.childNodes.length-1].innerText in GradesDict)){ //Sjekker om faget har karakter, stopper løkken hvis ikke
+            if (cell.className === "col6Resultat textAlignRight"){ //Finner resultatkolonnen
+                if(!(cell.childNodes[cell.childNodes.length-1].innerText in GradesDict)){ //Sjekker om faget har karakter, stopper løkken hvis ikke
                     break
                 }
-                points = GradesDict[col.childNodes[col.childNodes.length-1].innerText] //Gjør bokstavkarakter om til poeng
+                points = GradesDict[cell.childNodes[cell.childNodes.length-1].innerText] //Gjør bokstavkarakter om til poeng
                 temp.push(points); //Index 4 inneholder karakteren som string
 
             }
-            else if (col.className === "col7Studiepoeng textAlignRight"){
-                if(col.childNodes.length < 3){
+            else if (cell.className === "col7Studiepoeng textAlignRight"){
+                if(cell.childNodes.length < 3){
                     break
                 }
-                temp.push(col.childNodes);//Hvis karakteren (Ingen studiepoeng) er forbedret vil childnodes være tom, fikser i neste loop
+                temp.push(cell.childNodes);//Hvis karakteren (Ingen studiepoeng) er forbedret vil childnodes være tom, fikser i neste loop
                 let input = document.createElement("input"); //Legger til checkbox med hver karakter, slik at man manuelt kan ignorere karaktererGrid
                 input.setAttribute("type", "checkbox");
                 input.setAttribute("checked", "true");
                 input.addEventListener("change", update);
-                col.appendChild(input);
+                cell.appendChild(input);
                 temp.push(input)
             }
         }
