@@ -1,16 +1,20 @@
 {
   "name": "Utregning av karaktersnitt for studentweb",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Regner ut karaktersnittet automagisk!",
-  "content_scripts":[
+  "content_scripts": [
     {
-      "matches": ["https://fsweb.no/studentweb/resultater.jsf"],
-      "js": ["fsweb-karaktersnitt-utregning.js"]
+      "matches": [
+        "https://fsweb.no/studentweb/resultater.jsf*"
+      ],
+      "js": [
+        "fsweb-karaktersnitt-utregning.js"
+      ]
     }
-
   ],
   "icons": {
     "128": "calculator-icon.png"
   },
-  "manifest_version": 2
+  "manifest_version": 3,
+  "content_security_policy": {}
 }
